@@ -15,7 +15,10 @@ namespace PoemGenerator.Controllers
         Rule ruleInput = new Rule();
         Poem[] poems = new Poem[] { };
         StringBuilder rules = new StringBuilder();
-        
+        int count;
+        string entry;
+        string ruleFile;
+
 
         // GET: api/Rule
         public Rule Get()
@@ -40,14 +43,14 @@ namespace PoemGenerator.Controllers
         {
             List<Poem> poemList = poems.ToList<Poem>();
 
-            for (int i = 0; i < ruleInput.Count; i++)
-            {
+            //for (int i = 0; i < ruleInput.Count; i++)
+            //{
                 // find entry point in RuleFile
                 Poem newPoem = new Poem();
-                newPoem.PoemText = findEntry(ruleInput.Entry, ruleInput.RuleFile).ToString();
+            newPoem.PoemText = ruleInput.RuleFile.Substring(ruleInput.RuleFile.IndexOf(":"), ruleInput.RuleFile.IndexOf("\n")); // findEntry(ruleInput.Entry, ruleInput.RuleFile).ToString();
                 poemList.Add(newPoem);
                 poems = poemList.ToArray();
-            }
+            //}
 
             return poems;
         }
@@ -59,9 +62,9 @@ namespace PoemGenerator.Controllers
 
             if (newRules != null)
             {
-                int count = newRules.Count;
-                string entry = newRules.Entry;
-                string ruleFile = newRules.RuleFile;
+                count = newRules.Count;
+                entry = newRules.Entry;
+                ruleFile = newRules.RuleFile;
 
                 ruleInput.Count = count;
                 ruleInput.Entry = entry;
