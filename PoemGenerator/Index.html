@@ -27,9 +27,11 @@
                 });
                 
             
-                //var rulesData = JSON.stringify(document.getElementById('rulesID').value);
+                //var rulesData = JSON.stringify(document.getElementById('rulesID').value);     // I was planning to have the JSON entered on the web page
                 //var rulesObject = JSON.parse(rulesData);
-                alert(input);
+                //alert(input);
+                
+                // Send the rules for poem generation
                 var newRules = { "Count": input[0], "Entry": input[1], "RuleFile": input[2] }
                 console.info(newRules);
                 $.ajax({
@@ -39,17 +41,22 @@
                     data: newRules,
                     success: function (result) {
                         console.info(result);
-
-                        $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            url: "api/Rule",
-                            success: function (result) {
-                                console.info(result);
-                            }
-                        });
+                        newRules.Count = result.Count;
+                        newRules.Entry = result.Entry;
+                        newRules.RuleFile = result.RuleFile
                     }
                 });
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "api/Rule",
+                        data: newRules.RuleFile,
+                        success: function (result) {
+                            console.info(result);
+                        }
+                    });
+               
             });
         }
     </script>

@@ -47,7 +47,7 @@ namespace PoemGenerator.Controllers
             //{
                 // find entry point in RuleFile
                 Poem newPoem = new Poem();
-            newPoem.PoemText = ruleInput.RuleFile.Substring(ruleInput.RuleFile.IndexOf(":"), ruleInput.RuleFile.IndexOf("\n")); // findEntry(ruleInput.Entry, ruleInput.RuleFile).ToString();
+            newPoem.PoemText = ruleInput.RuleFile.Substring(ruleInput.RuleFile.IndexOf(":"), 10); // findEntry(ruleInput.Entry, ruleInput.RuleFile).ToString();
                 poemList.Add(newPoem);
                 poems = poemList.ToArray();
             //}
